@@ -1,0 +1,98 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #111;  /* Dark theme background */
+    color: #f5f5f5;          /* Light text */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background: #1a1a1a;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+/* Header Title */
+header h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #f5f5f5;
+}
+
+/* Navbar */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav ul li {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 2px;
+}
+
+/* Main Section */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+
+    background: url("../images/projects-bg.png") no-repeat center center/cover;
+    color: #fff;
+    text-align: left;
+}
+
+main div {
+    background: #1e1e1e;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+main div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+}
+
+main p {
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+/* Footer */
+footer {
+    background: #1a1a1a;
+    padding: 1rem;
+    text-align: center;
+    border-top: 1px solid #333;
+    font-size: 0.9rem;
+    color: #bbb;
+}
