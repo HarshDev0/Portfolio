@@ -21,6 +21,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* helps on smaller screens */
 }
 
 header h1 {
@@ -38,6 +39,7 @@ nav ul {
     list-style: none;
     display: flex;
     gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
 nav a {
@@ -52,7 +54,7 @@ nav a:hover {
 
 /* Main */
 main {
-    padding: 10rem;
+    padding: clamp(2rem, 5vw, 10rem);
     max-width: 1400px;
     margin: auto;
     font-size: 1.1rem;
@@ -60,9 +62,19 @@ main {
     /* Background */
     background: url("../images/home-bg.png") no-repeat center center/cover;
     color: #fff;
-
-    /* Left alignment */
+    position: relative;
     text-align: left;
+}
+
+main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4); /* dark overlay for readability */
+}
+
+main > * {
+    position: relative;
 }
 
 /* Footer */
@@ -135,4 +147,54 @@ footer p, footer span {
     margin-top: 2rem;
     font-size: 0.9rem;
     color: #bbb;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+/* Tablet screens */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    footer > div:first-of-type {
+        grid-template-columns: 1fr;
+    }
+
+    main {
+        text-align: center;
+        font-size: 1rem;
+    }
+}
+
+/* Small mobile screens */
+@media (max-width: 500px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header h2 {
+        font-size: 0.9rem;
+    }
+
+    nav ul {
+        gap: 0.8rem;
+    }
+
+    main {
+        padding: 2rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    footer {
+        padding: 2rem 1rem;
+    }
 }
