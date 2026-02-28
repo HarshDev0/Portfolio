@@ -88,17 +88,35 @@
 
         /* ================= HAMBURGER ================= */
 
+        /* Hamburger animation */
+
         .hamburger {
             display: none;
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
+            z-index: 2000;
         }
 
         .hamburger span {
             width: 25px;
             height: 2px;
             background: white;
+            transition: all 0.3s ease;
+        }
+
+        /* transform into X */
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
 
@@ -514,14 +532,43 @@
 
     <script>
 
-        /* hamburger */
-
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector(".nav-menu");
 
-        hamburger.onclick = () => {
+        hamburger.addEventListener("click", (e) => {
+
+            e.stopPropagation();
+
+            hamburger.classList.toggle("active");
             navMenu.classList.toggle("active");
-        };
+
+        });
+
+        /* close when clicking link */
+
+        document.querySelectorAll(".nav-link").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navMenu.classList.remove("active");
+                hamburger.classList.remove("active");
+
+            });
+
+        });
+
+        /* close when clicking outside */
+
+        document.addEventListener("click", (e) => {
+
+            if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+
+                navMenu.classList.remove("active");
+                hamburger.classList.remove("active");
+
+            }
+
+        });
 
 
         /* reveal animation */
