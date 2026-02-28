@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projects | Harsh DragoCodes</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ================= GLOBAL ================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: 'Poppins', sans-serif;
+            color: white;
+
+            background-image: url("images/background.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: transparent;
+
+        }
+
+        .nav-container {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+
+        }
+
+        .logo {
+
+            font-size: 20px;
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+
+        }
+
+        .nav-menu {
+
+            display: flex;
+            gap: 40px;
+            list-style: none;
+
+        }
+
+        .nav-link {
+
+            text-decoration: none;
+            color: white;
+            position: relative;
+
+        }
+
+        .nav-link::after {
+
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+
+            width: 0%;
+            height: 1px;
+
+            background: white;
+            transition: width 0.3s ease;
+
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+
+        /* hamburger */
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: white;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .hero-overlay {
+
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .hero-title {
+
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: 2px;
+
+        }
+
+
+        /* ================= PROJECTS ================= */
+
+        .projects {
+
+            padding: 120px 8%;
+            background: rgba(0, 0, 0, 0.55);
+
+        }
+
+
+        /* project card */
+
+        .project-card {
+
+            display: flex;
+            align-items: center;
+            gap: 60px;
+
+            margin-bottom: 140px;
+
+            opacity: 0;
+            transform: translateY(40px);
+
+            transition:
+                transform 0.6s ease,
+                opacity 0.6s ease;
+
+        }
+
+        /* alternating layout */
+
+        .project-card:nth-child(2) {
+            flex-direction: row-reverse;
+        }
+
+        .project-card.visible {
+
+            opacity: 1;
+            transform: translateY(0);
+
+        }
+
+
+        /* images */
+
+        .project-images {
+            flex: 1;
+        }
+
+        .project-images img {
+
+            width: 100%;
+            border-radius: 6px;
+            margin-bottom: 20px;
+
+            transition:
+                transform 0.5s ease,
+                filter 0.5s ease;
+
+        }
+
+        /* hover zoom */
+
+        .project-images img:hover {
+
+            transform: scale(1.02);
+            filter: brightness(1.05);
+
+        }
+
+
+        /* text */
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-info h2 {
+
+            font-size: 30px;
+            margin-bottom: 15px;
+
+        }
+
+        .project-info p {
+
+            color: #cccccc;
+            margin-bottom: 15px;
+            line-height: 1.7;
+
+        }
+
+        .project-tech {
+
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+
+        }
+
+        .project-link {
+
+            color: white;
+            text-decoration: none;
+            position: relative;
+            font-size: 15px;
+
+        }
+
+        .project-link::after {
+
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+
+            width: 0%;
+            height: 1px;
+            background: white;
+
+            transition: 0.3s;
+
+        }
+
+        .project-link:hover::after {
+            width: 100%;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+
+            padding: 40px 8%;
+            background: rgba(0, 0, 0, 0.55);
+
+            opacity: 0;
+            transform: translateY(30px);
+
+            transition: 0.6s ease;
+
+        }
+
+        .footer.visible {
+
+            opacity: 1;
+            transform: translateY(0);
+
+        }
+
+        .footer-container {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .footer-right {
+
+            display: flex;
+            gap: 25px;
+
+        }
+
+        .footer-right a {
+
+            color: white;
+            font-size: 18px;
+            opacity: 0.8;
+            transition: 0.3s;
+
+        }
+
+        .footer-right a:hover {
+            opacity: 1;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width:768px) {
+
+            .project-card {
+                flex-direction: column !important;
+            }
+
+            .nav-menu {
+
+                position: fixed;
+                top: 0;
+                right: -100%;
+
+                height: 100vh;
+                width: 250px;
+
+                background: #111;
+
+                flex-direction: column;
+
+                padding-top: 100px;
+                padding-left: 40px;
+
+                transition: 0.4s;
+
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                Harsh | DragoCodes
+            </a>
+
+            <ul class="nav-menu">
+
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+
+            </ul>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+    </nav>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-overlay">
+
+            <h1 class="hero-title">
+                PROJECTS
+            </h1>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- PROJECTS -->
+
+    <section class="projects">
+
+
+        <div class="project-card reveal">
+
+            <div class="project-images">
+
+                <img src="images/void-restaurant.png">
+                <img src="images/void-restaurant-2.png">
+
+            </div>
+
+            <div class="project-info">
+
+                <h2>VOID Restaurant Website</h2>
+
+                <p>
+                    Premium restaurant showcase website
+                </p>
+
+                <div class="project-tech">
+                    HTML • CSS • JavaScript
+                </div>
+
+                <a href="https://void-restaurant.netlify.app/" class="project-link" target="_blank">
+
+                    View Project →
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="project-card reveal">
+
+            <div class="project-images">
+
+                <img src="images/void-apparel.png">
+                <img src="images/void-apparel-2.png">
+
+            </div>
+
+            <div class="project-info">
+
+                <h2>VOID Ecommerce Website</h2>
+
+                <p>
+                    Minimal premium ecommerce experience
+                </p>
+
+                <div class="project-tech">
+                    HTML • CSS • JavaScript
+                </div>
+
+                <a href="https://void-apparel.netlify.app/" class="project-link" target="_blank">
+
+                    View Project →
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer reveal">
+
+        <div class="footer-container">
+
+            <div>
+                Harsh | DragoCodes
+            </div>
+
+            <div class="footer-right">
+
+                <!-- GitHub -->
+                <a href="https://github.com/HarshDev0" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+
+                    <i class="fab fa-github"></i>
+
+                </a>
+
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/dragocodes" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram">
+
+                    <i class="fab fa-instagram"></i>
+
+                </a>
+
+
+                <!-- Email -->
+                <a href="mailto:dragocodes@gmail.com" aria-label="Email">
+
+                    <i class="fas fa-envelope"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <script>
+
+        /* hamburger */
+
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.onclick = () => {
+            navMenu.classList.toggle("active");
+        };
+
+
+        /* repeatable reveal animation */
+
+        const reveals = document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver(entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                } else {
+
+                    entry.target.classList.remove("visible");
+
+                }
+
+            });
+
+        }, { threshold: 0.15 });
+
+        reveals.forEach(el => {
+            observer.observe(el);
+        });
+
+
+        /* stagger effect */
+
+        document.querySelectorAll(".project-card").forEach((card, index) => {
+
+            card.style.transitionDelay = `${index * 0.15}s`;
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

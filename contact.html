@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact | Harsh DragoCodes</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ================= GLOBAL ================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+
+            background-image: url("images/background.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+
+        /* NAV LINKS */
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0%;
+            height: 1px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+
+        /* ================= HAMBURGER ================= */
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: white;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.55);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-title {
+
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: 2px;
+
+        }
+
+
+        /* ================= SECTION ================= */
+
+        .section {
+            padding: 120px 8%;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+
+        /* ================= INTRO ================= */
+
+        .contact-intro {
+
+            max-width: 600px;
+            margin-bottom: 60px;
+
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.6s ease;
+
+        }
+
+        .contact-intro.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-intro p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+
+        /* ================= CONTACT TILES ================= */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .contact-tile {
+
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            transition: 0.3s ease;
+
+            opacity: 0;
+            transform: translateY(30px);
+
+        }
+
+        .contact-tile.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-tile:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .contact-title {
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            color: #aaa;
+        }
+
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .contact-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0%;
+            height: 1px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .contact-link:hover::after {
+            width: 100%;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .contact-form {
+
+            max-width: 600px;
+
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.6s ease;
+
+        }
+
+        .contact-form.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            color: white;
+            font-family: 'Poppins';
+
+        }
+
+        .contact-form textarea {
+            resize: none;
+        }
+
+
+        /* BUTTON */
+
+        .contact-form button {
+
+            padding: 14px 32px;
+
+            background: transparent;
+            color: white;
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            font-family: 'Poppins';
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+        .contact-form button:hover {
+
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+
+        }
+
+
+        /* SUCCESS MESSAGE */
+
+        .success-message {
+
+            margin-top: 20px;
+            color: #aaa;
+
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.6s;
+
+        }
+
+        .success-message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+
+            padding: 40px 8%;
+            background: rgba(0, 0, 0, 0.55);
+
+            opacity: 0;
+            transform: translateY(30px);
+
+            transition: 0.8s;
+
+        }
+
+        .footer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width:768px) {
+
+            .nav-menu {
+
+                position: fixed;
+                top: 0;
+                right: -100%;
+
+                height: 100vh;
+                width: 250px;
+
+                background: #111;
+
+                flex-direction: column;
+                padding-top: 100px;
+                padding-left: 40px;
+
+                transition: 0.4s;
+
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                Harsh | DragoCodes
+            </a>
+
+            <ul class="nav-menu">
+
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+
+            </ul>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-overlay">
+
+            <div class="hero-title">
+                CONTACT
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="section">
+
+        <div class="contact-intro reveal">
+
+            <p>
+                Have a project in mind or want to collaborate?
+                Reach me directly or send a message below.
+            </p>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+
+            <div class="contact-tile reveal">
+
+                <div class="contact-title">
+                    <i class="fas fa-envelope"></i> Email
+                </div>
+
+                <div class="contact-value">
+
+                    <a href="mailto:dragocodes@gmail.com" class="contact-link">
+                        dragocodes@gmail.com
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-tile reveal">
+
+                <div class="contact-title">
+                    <i class="fab fa-github"></i> GitHub
+                </div>
+
+                <div class="contact-value">
+                    <a href="https://github.com/HarshDev0" target="_blank" rel="noopener noreferrer"
+                        class="contact-link">
+                        HarshDev0
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="contact-tile reveal">
+
+                <div class="contact-title">
+                    <i class="fab fa-instagram"></i> Instagram
+                </div>
+
+                <div class="contact-value">
+                    <a href="https://instagram.com/dragocodes/" target="_blank" rel="noopener noreferrer"
+                        class="contact-link">
+                        dragocodes
+                    </a>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <form action="https://formspree.io/f/xnjbrrdd" method="POST" class="contact-form reveal" id="contactForm"
+            novalidate>
+
+            <input type="text" name="name" placeholder="Your Name" required>
+
+            <input type="email" name="email" placeholder="Your Email" required>
+
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+
+            <button type="submit">
+                Send Message
+            </button>
+
+            <div class="success-message" id="successMessage">
+                Message sent successfully.
+            </div>
+
+        </form>
+
+    </section>
+
+
+
+    <footer class="footer reveal">
+        Harsh | DragoCodes
+    </footer>
+
+
+
+    <script>
+
+        /* hamburger */
+
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.onclick = () => {
+            navMenu.classList.toggle("active");
+        };
+
+
+        /* reveal animation */
+
+        const reveals = document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                } else {
+                    entry.target.classList.remove("visible");
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(el => observer.observe(el));
+
+
+        /* AJAX FORMSPREE FIX */
+
+        const form = document.getElementById("contactForm");
+        const success = document.getElementById("successMessage");
+
+        form.addEventListener("submit", async function (e) {
+
+            e.preventDefault();
+
+            const data = new FormData(form);
+
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+
+                success.classList.add("visible");
+                form.reset();
+
+            } else {
+
+                alert("Error sending message.");
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>
